@@ -1,0 +1,20 @@
+{
+  "name": "goit-practice-nodejs",
+  "version": "1.0.0",
+  "description": "Putting theory into practice.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Larisa-Antsifrova/goit-practice-nodejs.git"
+  },
+  "author": "Larisa Antsifrova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Larisa-Antsifrova/goit-practice-nodejs/issues"
+  },
+  "homepage": "https://github.com/Larisa-Antsifrova/goit-practice-nodejs#readme"
+}

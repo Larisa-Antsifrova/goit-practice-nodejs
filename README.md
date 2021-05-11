@@ -1,2 +1,5 @@
 # goit-practice-nodejs
-Into the unknown.
+
+## Notes snippets
+
+01 - Notes. Imports. Files System. CLI apps.

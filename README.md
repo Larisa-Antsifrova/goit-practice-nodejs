@@ -2,5 +2,5 @@
 
 ## Notes snippets
 
-01 - Notes. Imports. Files System. CLI apps. HTTP Server. Simple web-server.
-02 - Notes. Express Framework.
+- 01 - Imports. Files System. CLI apps. HTTP Server. Simple web-server.
+- 02 - Express Framework. Static resources. Middleware. Router. EJS Templates.

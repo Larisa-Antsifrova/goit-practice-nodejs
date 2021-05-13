@@ -8,3 +8,9 @@
 ## Live Webinars
 
 - 2021-05-11 - Into into NodeJS.
+
+## Lectures
+
+- 01 - NodeJS intro.
+- 02 - HTTP server.
+- 02 - Express server.

@@ -4,6 +4,8 @@
 
 - 01 - Imports. Files System. CLI apps. HTTP Server. Simple web-server.
 - 02 - Express Framework. Static resources. Middleware. Router. EJS Templates.
+- 03 - Express App.
+- 04 - REST API 
 
 ## Live Webinars
 

@@ -4,8 +4,8 @@
 
 - 01 - Imports. Files System. CLI apps. HTTP Server. Simple web-server.
 - 02 - Express Framework. Static resources. Middleware. Router. EJS Templates.
-- 03 - Express App.
-- 04 - REST API
+- 03 - Express App. - TODO
+- 04 - REST API. - TODO
 
 ## Live Webinars
 
@@ -13,9 +13,10 @@
 
 ## Lectures
 
-- 01 - NodeJS intro.
+- 01 - NodeJS intro. - TODO
 - 02 - HTTP server.
 - 02 - Express server.
+- 03 - REST API. - TODO
 
 ## Practice Sessions
 

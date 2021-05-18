@@ -16,7 +16,8 @@
 - 01 - NodeJS intro. - TODO
 - 02 - HTTP server.
 - 02 - Express server.
-- 03 - REST API. - TODO
+- 03 - Express App.
+- 04 - REST API
 
 ## Practice Sessions
 

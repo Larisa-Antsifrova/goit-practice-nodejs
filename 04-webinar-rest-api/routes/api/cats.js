@@ -5,8 +5,8 @@ const { validateAddCat, validateUpdateCat, validateUpdateVaccinatedCat } = requi
 
 router.get('/', async (req, res, next) => {
   try {
-    const cats = Cats.getAllCats();
-    res.json({ status: 'success', code: 200, payload: { cats } });
+    const cats = await Cats.getAllCats();
+    return res.json({ status: 'success', code: 200, cats });
   } catch (error) {
     next(error);
   }

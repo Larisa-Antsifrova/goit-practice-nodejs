@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Cats = require('../../model/index');
+const { validateAddCat, validateUpdateCat, validateUpdateVaccinatedCat } = require('./validaton');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', validateAddCat, async (req, res, next) => {
   try {
     const cat = await Cats.addCat(req.body);
     return res.status(201).json({ status: 'success', code: 201, payload: { cat: cat } });
@@ -46,7 +47,7 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', validateUpdateCat, async (req, res, next) => {
   try {
     const id = req.params.id;
     const catToUpdate = await Cats.updateCat(id, req.body);
@@ -59,7 +60,7 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
-router.patch('/:id/vaccinated', async (req, res, next) => {
+router.patch('/:id/vaccinated', validateUpdateVaccinatedCat, async (req, res, next) => {
   try {
     const id = req.params.id;
     const catToUpdate = await Cats.updateCat(id, req.body);

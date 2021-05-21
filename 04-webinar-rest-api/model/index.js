@@ -43,7 +43,16 @@ const addCat = async body => {
   return record;
 };
 
-const updateCat = async (id, body) => {};
+const updateCat = async (id, body) => {
+  const data = await readCats();
+  const [catToUpdate] = data.filter(cat => cat.id === id);
+
+  if (catToUpdate) {
+    Object.assign(catToUpdate, body);
+    await fs.writeFile(catsPath, JSON.stringify(data, null, 2));
+  }
+  return catToUpdate;
+};
 
 module.exports = {
   getAllCats,

@@ -47,11 +47,29 @@ router.delete('/:id', async (req, res, next) => {
 });
 
 router.put('/:id', async (req, res, next) => {
-  res.json({ message: 'template message' });
+  try {
+    const id = req.params.id;
+    const catToUpdate = await Cats.updateCat(id, req.body);
+    if (catToUpdate) {
+      return res.json({ status: 'success', code: 200, message: 'The cat was updated' });
+    }
+    return res.json({ status: 'error', code: 404, message: 'The cat was not found' });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.patch('/:id/vaccinated', async (req, res, next) => {
-  res.json({ message: 'template message' });
+  try {
+    const id = req.params.id;
+    const catToUpdate = await Cats.updateCat(id, req.body);
+    if (catToUpdate) {
+      return res.json({ status: 'success', code: 200, message: 'The cat was updated' });
+    }
+    return res.json({ status: 'error', code: 404, message: 'The cat was not found' });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

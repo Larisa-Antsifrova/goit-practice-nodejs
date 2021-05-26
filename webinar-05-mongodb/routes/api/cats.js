@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Cats = require('../../model/index');
+const Cats = require('../../model/cats');
 const { validateAddCat, validateUpdateCat, validateUpdateVaccinatedCat } = require('./validaton');
 
 router.get('/', async (req, res, next) => {

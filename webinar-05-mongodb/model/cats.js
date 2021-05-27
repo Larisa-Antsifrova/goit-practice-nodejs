@@ -23,6 +23,10 @@ const getCatById = async id => {
 const removeCat = async id => {
   const collection = await getCollection(db, 'cats');
   const objId = new ObjectId(id);
+
+  const { value: result } = await collection.findOneAndDelete({ _id: objId });
+
+  return result;
 };
 
 const addCat = async body => {
@@ -33,13 +37,24 @@ const addCat = async body => {
     ...(body.isVaccinated ? {} : { isVaccinated: false }),
   };
 
-  const result = await collection.insertOne(record);
+  const {
+    ops: [result],
+  } = await collection.insertOne(record);
+
   return result;
 };
 
 const updateCat = async (id, body) => {
   const collection = await getCollection(db, 'cats');
   const objId = new ObjectId(id);
+
+  const { value: result } = await collection.findOneAndUpdate(
+    { _id: objId },
+    { $set: body },
+    { returnOriginal: false }
+  );
+
+  return result;
 };
 
 module.exports = {

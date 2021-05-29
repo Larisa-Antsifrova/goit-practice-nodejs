@@ -1,4 +1,4 @@
-const Cat = require('./schema');
+const Cat = require('../model/schema');
 
 const getAllCats = async () => {
   const results = await Cat.find();

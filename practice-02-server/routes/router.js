@@ -1,9 +1,11 @@
 const { Router } = require('express');
 const Book = require('../models/book.model');
+const createBookMiddleware = require('../middlewares/createBook.middleware');
+const validateId = require('../middlewares/validateId.middleware');
 
 const router = Router();
 
-router.post('/book', async (req, res) => {
+router.post('/book', createBookMiddleware, async (req, res) => {
   const { body } = req;
 
   try {
@@ -23,7 +25,7 @@ router.get('/book', async (req, res) => {
   }
 });
 
-router.get('/book/:id', async (req, res) => {
+router.get('/book/:id', validateId, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -34,7 +36,7 @@ router.get('/book/:id', async (req, res) => {
   }
 });
 
-router.put('/book/:id', async (req, res) => {
+router.put('/book/:id', validateId, async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
@@ -46,7 +48,7 @@ router.put('/book/:id', async (req, res) => {
   }
 });
 
-router.delete('/book/:id', async (req, res) => {
+router.delete('/book/:id', validateId, async (req, res) => {
   const { id } = req.params;
   try {
     await Book.findByIdAndDelete(id);

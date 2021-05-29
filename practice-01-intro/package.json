@@ -1,0 +1,29 @@
+{
+  "name": "goit-practice-nodejs",
+  "version": "1.0.0",
+  "description": "- 01 - Imports. Files System. CLI apps. HTTP Server. Simple web-server.\r - 02 - Express Framework. Static resources. Middleware. Router. EJS Templates.",
+  "main": "index.js",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Larisa-Antsifrova/goit-practice-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Larisa-Antsifrova/goit-practice-nodejs/issues"
+  },
+  "homepage": "https://github.com/Larisa-Antsifrova/goit-practice-nodejs#readme"
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Larisa Antsifrova",
+    "email": "thecarrot@ukr.net",
+    "comment": "Message 1"
+  },
+  {
+    "name": "Yarik Evgennievich",
+    "email": "cupoftea@gmail.com",
+    "comment": "Message 2"
+  },
+  {
+    "name": "Test",
+    "email": "test@test.com",
+    "comment": "Test"
+  }
+]

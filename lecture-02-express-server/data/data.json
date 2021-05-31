@@ -1,0 +1,28 @@
+{
+  "articles": [
+    {
+      "title": "How to Survive NodeJS",
+      "author": "Yurii Kuchma",
+      "date": "11 May, 2021",
+      "body": "Nikak. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex fugiat maxime cupiditate rerum odit, similique, assumenda harum id totam nostrum veritatis? Necessitatibus expedita incidunt dicta!"
+    },
+    {
+      "title": "How to Understand Yarik's Jokes",
+      "author": "Yarik Evgenievich",
+      "date": "13 May, 2021",
+      "body": "That's a mystery of the Universe. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex fugiat maxime cupiditate rerum odit, similique, assumenda harum id totam nostrum veritatis? Necessitatibus expedita incidunt dicta!"
+    },
+    {
+      "title": "Larisa is Puzzled about Commas",
+      "author": "Bad Luck",
+      "date": "14 May, 2021",
+      "body": "What is going on? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex fugiat maxime cupiditate rerum odit, similique, assumenda harum id totam nostrum veritatis? Necessitatibus expedita incidunt dicta!"
+    },
+    {
+      "title": "How to Fix Bugs with Commas",
+      "author": "Annoyed Larisa",
+      "date": "14 May, 2021",
+      "body": "Read Docs of EJS templating language :) Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex fugiat maxime cupiditate rerum odit, similique, assumenda harum id totam nostrum veritatis? Necessitatibus expedita incidunt dicta!"
+    }
+  ]
+}

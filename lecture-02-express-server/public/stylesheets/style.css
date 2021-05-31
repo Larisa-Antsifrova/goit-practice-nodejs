@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: wheat;
+
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+input,
+textarea {
+  display: block;
+  width: 300px;
+  margin-bottom: 20px;
+  padding: 5px 0 5px 10px;
+
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  background-color: grey;
+}
+
+input {
+  height: 40px;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit {
+  background-color: green;
+}
+
+.submit:hover,
+.submit:focus {
+  color: green;
+  background-color: white;
+}
+
+.cancel {
+  background-color: coral;
+}
+
+.cancel:hover,
+.cancel:focus {
+  color: coral;
+  background-color: white;
+}

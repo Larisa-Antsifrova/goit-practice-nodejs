@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1><% title %></h1>
+    <p>Enjoy Our Top Articles</p>
+    <%_ articles.map(parseArticles) %>
+  </body>
+</html>
+
+<% function parseArticles(article) { %>
+<h2><%= article.title %></h2>
+<p>Written <%= article.date %> by <%= article.author %></p>
+<p><%= article.body %></p>
+<p>Read more...</p>
+<% } %>

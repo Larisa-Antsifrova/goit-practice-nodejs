@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EJS Temlate Example</title>
+    <style></style>
+  </head>
+  <body>
+    <% function userView(user, i) { %>
+    <tr>
+      <td><%= i %></td>
+      <td><%= user.name %></td>
+      <td><%= user.age %></td>
+      <td><%= user.species %></td>
+    </tr>
+    <% } %>
+    <table border="1">
+      <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Species</td>
+      </tr>
+      <% users.map(userView) %>
+    </table>
+  </body>
+</html>

@@ -32,7 +32,7 @@ const userSchema = new Schema(
     gender: {
       type: String,
       enum: genders,
-      default: null,
+      default: Gender.NONE,
     },
   },
   {

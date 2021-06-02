@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Controllers = require('../../controllers/cats-controllers');
+const Controllers = require('../../../controllers/cats-controllers');
 const { validateAddCat, validateUpdateCat, validateUpdateVaccinatedCat, validateMongoId } = require('./validaton');
 
 router.get('/', Controllers.getAllCats).post('/', validateAddCat, Controllers.addCat);

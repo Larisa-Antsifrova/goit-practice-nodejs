@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaTypes } = require('mongoose');
 
 const catSchema = new Schema(
   {
@@ -13,8 +13,8 @@ const catSchema = new Schema(
       default: false,
     },
     owner: {
-      name: String,
-      age: Number,
+      name: SchemaTypes.ObjectId,
+      ref: 'user',
     },
     features: {
       type: Array,
@@ -32,7 +32,7 @@ const catSchema = new Schema(
       },
     },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 catSchema.virtual('info').get(function () {

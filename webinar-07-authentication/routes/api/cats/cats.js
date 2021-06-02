@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Controllers = require('../../../controllers/cats-controllers');
 const { validateAddCat, validateUpdateCat, validateUpdateVaccinatedCat, validateMongoId } = require('./validaton');
+const guard = require('../../../helpers/guard');
 
-router.get('/', Controllers.getAllCats).post('/', validateAddCat, Controllers.addCat);
+router.get('/', guard, Controllers.getAllCats).post('/', guard, validateAddCat, Controllers.addCat);
 
 router
-  .get('/:id', validateMongoId, Controllers.getCatById)
-  .delete('/:id', validateMongoId, Controllers.removeCat)
-  .put('/:id', validateMongoId, validateUpdateCat, Controllers.updateCat);
+  .get('/:id', guard, validateMongoId, Controllers.getCatById)
+  .delete('/:id', guard, validateMongoId, Controllers.removeCat)
+  .put('/:id', guard, validateMongoId, validateUpdateCat, Controllers.updateCat);
 
-router.patch('/:id/vaccinated', validateMongoId, validateUpdateVaccinatedCat, Controllers.updateCat);
+router.patch('/:id/vaccinated', guard, validateMongoId, validateUpdateVaccinatedCat, Controllers.updateCat);
 
 module.exports = router;

@@ -11,7 +11,8 @@ const schemaUpdateCat = Joi.object({
   name: Joi.string().alphanum().min(3).max(30).optional(),
   age: Joi.number().integer().min(0).max(35).optional(),
   isVaccinated: Joi.boolean().optional(),
-}).or('name', 'age', 'isVaccinated');
+  features: Joi.array().optional(),
+}).or('name', 'age', 'isVaccinated', 'features');
 
 const schemaUpdateVaccinatedCat = Joi.object({
   isVaccinated: Joi.boolean().required(),

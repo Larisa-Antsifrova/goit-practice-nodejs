@@ -2,7 +2,8 @@ const Cats = require('../repositories/cats');
 
 const getAllCats = async (req, res, next) => {
   try {
-    const cats = await Cats.getAllCats();
+    const userId = req.user.id;
+    const cats = await Cats.getAllCats(userId);
     return res.json({ status: 'success', code: 200, cats });
   } catch (error) {
     next(error);
@@ -11,8 +12,9 @@ const getAllCats = async (req, res, next) => {
 
 const getCatById = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const id = req.params.id;
-    const requiredCat = await Cats.getCatById(id);
+    const requiredCat = await Cats.getCatById(userId, id);
     if (requiredCat) {
       return res.json({ status: 'success', code: 200, cat: requiredCat });
     }
@@ -24,7 +26,8 @@ const getCatById = async (req, res, next) => {
 
 const addCat = async (req, res, next) => {
   try {
-    const cat = await Cats.addCat(req.body);
+    const userId = req.user.id;
+    const cat = await Cats.addCat(userId, req.body);
     return res.status(201).json({ status: 'success', code: 201, cat });
   } catch (error) {
     next(error);
@@ -33,8 +36,9 @@ const addCat = async (req, res, next) => {
 
 const removeCat = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const id = req.params.id;
-    const removedCat = await Cats.removeCat(id);
+    const removedCat = await Cats.removeCat(userId, id);
     if (removedCat) {
       return res.json({ status: 'success', code: 200, message: 'The cat was deleted', cat: removedCat });
     }
@@ -46,8 +50,9 @@ const removeCat = async (req, res, next) => {
 
 const updateCat = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const id = req.params.id;
-    const catToUpdate = await Cats.updateCat(id, req.body);
+    const catToUpdate = await Cats.updateCat(userId, id, req.body);
     if (catToUpdate) {
       return res.json({ status: 'success', code: 200, message: 'The cat was updated', cat: catToUpdate });
     }

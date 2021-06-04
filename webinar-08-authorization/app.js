@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { apiLimiter } = require('./helpers/constants');
+const boolParser = require('express-query-boolean');
 
 const catsRouter = require('./routes/api/cats/cats');
 const usersRouter = require('./routes/api/users/users');
@@ -15,6 +16,7 @@ app.use(helmet());
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json({ limit: 10000 }));
+app.use(boolParser());
 
 app.use('/api/', rateLimit(apiLimiter));
 app.use('/api/cats', catsRouter);

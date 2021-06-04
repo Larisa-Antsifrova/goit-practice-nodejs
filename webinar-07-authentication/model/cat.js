@@ -13,7 +13,7 @@ const catSchema = new Schema(
       default: false,
     },
     owner: {
-      name: SchemaTypes.ObjectId,
+      type: SchemaTypes.ObjectId,
       ref: 'user',
     },
     features: {

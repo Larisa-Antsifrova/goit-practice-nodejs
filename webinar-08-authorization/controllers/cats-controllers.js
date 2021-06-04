@@ -3,8 +3,8 @@ const Cats = require('../repositories/cats');
 const getAllCats = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const cats = await Cats.getAllCats(userId);
-    return res.json({ status: 'success', code: 200, cats });
+    const { docs: cats, ...rest } = await Cats.getAllCats(userId, req.query);
+    return res.json({ status: 'success', code: 200, data: { cats, ...rest } });
   } catch (error) {
     next(error);
   }

@@ -1,10 +1,30 @@
 const Cat = require('../model/cat');
 
-const getAllCats = async userId => {
-  const results = await Cat.find({ owner: userId }).populate({
-    path: 'owner',
-    select: 'name email gender -_id',
+const getAllCats = async (userId, query) => {
+  // const results = await Cat.find({ owner: userId }).populate({
+  //   path: 'owner',
+  //   select: 'name email gender -_id',
+  // });
+
+  const { sortBy, sortByDesc, filter, vaccinated = null, limit = 5, offset = 0 } = query;
+
+  const searchOptions = { owner: userId };
+
+  if (vaccinated !== null) {
+    searchOptions.isVaccinated = vaccinated;
+  }
+
+  const results = await Cat.paginate(searchOptions, {
+    limit,
+    offset,
+    sort: { ...(sortBy ? { [sortBy]: 1 } : {}), ...(sortByDesc ? { [sortByDesc]: -1 } : {}) },
+    select: filter ? filter.split('|').join(' ') : '',
+    populate: {
+      path: 'owner',
+      select: 'name email gender -_id',
+    },
   });
+
   return results;
 };
 

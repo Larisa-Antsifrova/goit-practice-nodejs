@@ -31,4 +31,8 @@ app.use((err, req, res, next) => {
   res.status(status).json({ status: 'fail', code: status, message: err.message });
 });
 
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 module.exports = app;

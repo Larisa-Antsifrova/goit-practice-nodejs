@@ -62,7 +62,13 @@ const login = async (req, res, next) => {
   }
 };
 
-const logout = (req, res, next) => {};
+const logout = async (req, res, next) => {
+  const id = req.user.id;
+  try {
+    await Users.updateToken(id, null);
+    res.status(HttpCodes.NO_CONTENT).json({});
+  } catch (error) {}
+};
 
 module.exports = {
   register,

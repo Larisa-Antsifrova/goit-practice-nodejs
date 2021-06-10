@@ -2,7 +2,7 @@ const Users = require('../repositories/users');
 const { HttpCodes } = require('../helpers/constants');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-// const fs = require('fs/promises');
+const fs = require('fs/promises');
 // const path = require('path');
 // const UploadAvatarService = require('../services/local-upload');
 const UploadAvatarService = require('../services/cloud-upload');
@@ -101,20 +101,14 @@ const logout = async (req, res, next) => {
 const avatars = async (req, res, next) => {
   try {
     const id = req.user.id;
-    console.log('Here 1');
-    const avatarPath = req.file.path;
-    console.log('Here 2');
     const uploads = new UploadAvatarService();
-    console.log('Here 3');
-    const { avatarUrl, idCloudAvatar } = await uploads.saveAvatar(avatarPath);
-    console.log('Here 4');
+    const { avatarUrl, idCloudAvatar } = await uploads.saveAvatar(req.file.path, req.user.idCloudAvatar);
 
-    // TODO: to delete image from uploads folder
+    fs.unlink(req.file.path);
 
     await Users.updateAvatar(id, avatarUrl, idCloudAvatar);
     res.json({ status: 'success', code: HttpCodes.OK, message: 'Avatar uploaded!', data: { avatarUrl } });
   } catch (error) {
-    console.log('Error happens here', req.file);
     next(error);
   }
 };

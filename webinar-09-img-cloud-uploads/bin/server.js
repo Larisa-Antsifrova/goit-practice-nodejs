@@ -11,7 +11,6 @@ db.then(() => {
   app.listen(PORT, async () => {
     await createFolderIfNotExist(UPLOAD_DIR);
     await createFolderIfNotExist(AVATAR_DIR);
-
     console.log(`Server running. Use our API on port: ${PORT}`);
   });
 }).catch(error => {

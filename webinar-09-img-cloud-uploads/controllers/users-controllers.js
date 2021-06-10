@@ -1,10 +1,11 @@
 const Users = require('../repositories/users');
 const { HttpCodes } = require('../helpers/constants');
 const jwt = require('jsonwebtoken');
-const fs = require('fs/promises');
-const path = require('path');
-const UploadAvatartService = require('../services/local-upload');
 require('dotenv').config();
+// const fs = require('fs/promises');
+// const path = require('path');
+// const UploadAvatarService = require('../services/local-upload');
+const UploadAvatarService = require('../services/cloud-upload');
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -74,21 +75,46 @@ const logout = async (req, res, next) => {
   } catch (error) {}
 };
 
+// Local images upload
+
+// const avatars = async (req, res, next) => {
+//   try {
+//     const id = req.user.id;
+//     const uploads = new UploadAvatarService(process.env.AVATAR_DIR);
+//     const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file });
+
+//     try {
+//       await fs.unlink(path.join(process.env.AVATAR_DIR, req.user.avatar));
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+
+//     await Users.updateAvatar(id, avatarUrl);
+//     res.json({ status: 'success', code: HttpCodes.OK, message: 'Avatar uploaded!', data: { avatarUrl } });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+// Cloudinary images upload
+
 const avatars = async (req, res, next) => {
   try {
     const id = req.user.id;
-    const uploads = new UploadAvatartService(process.env.AVATAR_DIR);
-    const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file });
+    console.log('Here 1');
+    const avatarPath = req.file.path;
+    console.log('Here 2');
+    const uploads = new UploadAvatarService();
+    console.log('Here 3');
+    const { avatarUrl, idCloudAvatar } = await uploads.saveAvatar(avatarPath);
+    console.log('Here 4');
 
-    try {
-      await fs.unlink(path.join(process.env.AVATAR_DIR, req.user.avatar));
-    } catch (error) {
-      console.log(error.message);
-    }
+    // TODO: to delete image from uploads folder
 
-    await Users.updateAvatar(id, avatarUrl);
+    await Users.updateAvatar(id, avatarUrl, idCloudAvatar);
     res.json({ status: 'success', code: HttpCodes.OK, message: 'Avatar uploaded!', data: { avatarUrl } });
   } catch (error) {
+    console.log('Error happens here', req.file);
     next(error);
   }
 };

@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs/promises');
 const createFolderIfNotExist = require('../helpers/create-folder');
 
-class UploadAvatartService {
+class UploadAvatarService {
   constructor(avatarDir) {
     this.avatarDir = avatarDir;
   }
@@ -25,4 +25,4 @@ class UploadAvatartService {
   }
 }
 
-module.exports = UploadAvatartService;
+module.exports = UploadAvatarService;

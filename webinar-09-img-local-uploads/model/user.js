@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
+const gravatar = require('gravatar');
 const { Gender } = require('../helpers/constants');
+
 const SALT_FACTOR = 8;
 const genders = Object.values(Gender);
 
@@ -10,7 +12,7 @@ const userSchema = new Schema(
     age: {
       type: Number,
       min: 0,
-      max: 35,
+      max: 35
     },
     email: {
       type: String,
@@ -19,26 +21,32 @@ const userSchema = new Schema(
       validate(value) {
         const re = /\S+@\S+\.\S+/;
         return re.test(String(value).toLocaleLowerCase());
-      },
+      }
     },
     password: {
       type: String,
-      required: true,
+      required: true
     },
     token: {
       type: String,
-      default: null,
+      default: null
+    },
+    avatar: {
+      type: String,
+      default: function () {
+        return gravatar.url(this.email, { s: '250' }, true);
+      }
     },
     gender: {
       type: String,
       enum: genders,
-      default: Gender.NONE,
-    },
+      default: Gender.NONE
+    }
   },
   {
     versionKey: false,
-    timestamps: true,
-  },
+    timestamps: true
+  }
 );
 
 userSchema.pre('save', async function (next) {

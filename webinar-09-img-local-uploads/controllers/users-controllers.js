@@ -12,11 +12,11 @@ const register = async (req, res, next) => {
       return res.status(HttpCodes.CONFLICT).json({
         status: 'error',
         code: HttpCodes.CONFLICT,
-        message: 'This email is already in use.',
+        message: 'This email is already in use.'
       });
     }
 
-    const { id, name, email, gender } = await Users.createUser(req.body);
+    const { id, name, email, avatar, gender } = await Users.createUser(req.body);
     return res.status(HttpCodes.CREATED).json({
       status: 'success',
       code: HttpCodes.CREATED,
@@ -25,8 +25,9 @@ const register = async (req, res, next) => {
         id,
         name,
         email,
-        gender,
-      },
+        avatar,
+        gender
+      }
     });
   } catch (error) {
     next(error);
@@ -42,7 +43,7 @@ const login = async (req, res, next) => {
       return res.status(HttpCodes.UNAUTHORIZED).json({
         status: 'error',
         code: HttpCodes.UNAUTHORIZED,
-        message: 'Invalid credentials.',
+        message: 'Invalid credentials.'
       });
     }
 
@@ -55,7 +56,7 @@ const login = async (req, res, next) => {
       status: 'success',
       code: HttpCodes.OK,
       message: 'You have logged in.',
-      data: { token },
+      data: { token }
     });
   } catch (error) {
     next(error);
@@ -73,5 +74,5 @@ const logout = async (req, res, next) => {
 module.exports = {
   register,
   login,
-  logout,
+  logout
 };

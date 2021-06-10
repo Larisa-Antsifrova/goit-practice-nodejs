@@ -1,6 +1,9 @@
 const Users = require('../repositories/users');
 const { HttpCodes } = require('../helpers/constants');
 const jwt = require('jsonwebtoken');
+const fs = require('fs/promises');
+const path = require('path');
+const UploadAvatartService = require('../services/local-upload');
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -72,7 +75,22 @@ const logout = async (req, res, next) => {
 };
 
 const avatars = async (req, res, next) => {
-  res.json({ message: 'Avatar uploaded!' });
+  try {
+    const id = req.user.id;
+    const uploads = new UploadAvatartService(process.env.AVATAR_DIR);
+    const avatarUrl = await uploads.saveAvatar({ idUser: id, file: req.file });
+
+    try {
+      await fs.unlink(path.join(process.env.AVATAR_DIR, req.user.avatar));
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    await Users.updateAvatar(id, avatarUrl);
+    res.json({ status: 'success', code: HttpCodes.OK, message: 'Avatar uploaded!', data: { avatarUrl } });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {

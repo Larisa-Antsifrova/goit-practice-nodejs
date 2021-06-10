@@ -3,8 +3,8 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { apiLimiter } = require('./helpers/constants');
 const boolParser = require('express-query-boolean');
+const { apiLimiter, HttpCodes } = require('./helpers/constants');
 
 const catsRouter = require('./routes/api/cats/cats');
 const usersRouter = require('./routes/api/users/users');
@@ -27,8 +27,12 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  res.status(status).json({ status: 'fail', code: status, message: err.message });
+  const status = err.status || HttpCodes.INTERNAL_SERVER_ERROR;
+  res.status(status).json({
+    status: status === HttpCodes.INTERNAL_SERVER_ERROR ? 'fail' : 'error',
+    code: status,
+    message: err.message
+  });
 });
 
 process.on('unhandledRejection', (reason, promise) => {

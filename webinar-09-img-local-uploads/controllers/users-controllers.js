@@ -71,8 +71,13 @@ const logout = async (req, res, next) => {
   } catch (error) {}
 };
 
+const avatars = async (req, res, next) => {
+  res.json({ message: 'Avatar uploaded!' });
+};
+
 module.exports = {
   register,
   login,
-  logout
+  logout,
+  avatars
 };

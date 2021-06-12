@@ -1,7 +1,5 @@
 const Boardgame = require("../../models/boardgame-model");
 
-// boardgamesRouter.delete("/boardgames/:id");
-
 const getAllBoardgames = async (req, res) => {
   try {
     const allBoardgames = await Boardgame.find();
@@ -27,7 +25,6 @@ const createBoardgame = async (req, res) => {
     const boardgame = req.body;
 
     const isNotUnique = await Boardgame.findOne({ title: boardgame.title });
-    console.log("isUnique", isUnique);
 
     if (isNotUnique) {
       return res

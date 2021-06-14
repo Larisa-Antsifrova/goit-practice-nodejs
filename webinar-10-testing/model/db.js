@@ -1,29 +1,38 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
-const uriDb = process.env.URI_DB;
+const mongoose = require("mongoose");
+require("dotenv").config();
+let uriDb = null;
+
+if (process.env.NODE_ENV === "test") {
+  uriDb = process.env.URI_DB_TEST;
+} else {
+  uriDb = process.env.URI_DB;
+}
 
 const db = mongoose.connect(uriDb, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false,
   poolSize: 5,
 });
 
-mongoose.connection.on('connected', () => {
-  console.log(`Connection open.`);
-});
+if (process.env.NODE_ENV !== "test") {
+  mongoose.connection.on("connected", () => {
+    console.log(`Connection open.`);
+  });
 
-mongoose.connection.on('error', error => {
-  console.log(`Error Mongoose connection: ${error.message}.`);
-});
+  mongoose.connection.on("error", error => {
+    console.log(`Error Mongoose connection: ${error.message}.`);
+  });
 
-mongoose.connection.on('disconnected', () => {
-  console.log(`Mongoose connection terminated.`);
-});
+  mongoose.connection.on("disconnected", () => {
+    console.log(`Mongoose connection terminated.`);
+  });
+}
 
-process.on('SIGINT', async () => {
+process.on("SIGINT", async () => {
   mongoose.connection.close(() => {
-    console.log('Connection to DB terminated.');
+    console.log("Connection to DB terminated.");
     process.exit(1);
   });
 });

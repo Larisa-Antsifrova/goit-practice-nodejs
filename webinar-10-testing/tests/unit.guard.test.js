@@ -38,6 +38,24 @@ describe("Unit testing guard middleware", () => {
     });
   });
 
+  test("when error occured", () => {
+    passport.authenticate = jest.fn((strategy, options, callback) => () => {
+      const error = new Error("No user.");
+      callback(error, false);
+    });
+
+    guard(req, res, next);
+
+    expect(req.get).toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalled();
+    expect(res.json).toHaveBeenCalled();
+    expect(res.json).toHaveReturnedWith({
+      status: "error",
+      code: HttpCodes.UNAUTHORIZED,
+      message: "Invalid credentials.",
+    });
+  });
+
   test("when token is wrong", () => {
     passport.authenticate = jest.fn((strategy, options, callback) => () => {
       callback(null, { token: "wrong-token" });

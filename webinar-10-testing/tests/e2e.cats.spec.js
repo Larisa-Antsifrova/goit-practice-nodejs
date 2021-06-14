@@ -78,5 +78,16 @@ describe("E2e test Cats route", () => {
     });
   });
 
-  describe("POST request", () => {});
+  describe("POST request", () => {
+    test("should return status 201 when creating new cat", async () => {
+      const response = await request(app)
+        .post("/api/cats")
+        .set("Authorization", `Bearer ${token}`)
+        .send(newCat)
+        .set("Accept", "application/json");
+
+      expect(response.status).toEqual(201);
+      expect(response.body).toBeDefined();
+    });
+  });
 });

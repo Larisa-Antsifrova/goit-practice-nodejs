@@ -18,7 +18,9 @@ const getCatById = async (req, res, next) => {
     if (requiredCat) {
       return res.json({ status: "success", code: 200, cat: requiredCat });
     }
-    return res.json({ status: "error", code: 404, message: "Not found" });
+    return res
+      .status(404)
+      .json({ status: "error", code: 404, message: "Not found" });
   } catch (error) {
     next(error);
   }

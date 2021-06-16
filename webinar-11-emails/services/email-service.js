@@ -7,7 +7,10 @@ class EmailService {
 
     switch (env) {
       case "development":
-        this.link = `http://localhost:${process.env.PORT || 3000}`;
+        // Links for SendGrid
+        // this.link = `http://localhost:${process.env.PORT || 3000}`;
+        // Links for Nodemailer
+        this.link = "https://cb18d1df5bf2.ngrok.io";
         break;
 
       case "production":
@@ -15,7 +18,10 @@ class EmailService {
         break;
 
       default:
-        this.link = `http://localhost:${process.env.PORT || 3000}`;
+        // Links for SendGrid
+        // this.link = `http://localhost:${process.env.PORT || 3000}`;
+        // Links for Nodemailer
+        this.link = "https://cb18d1df5bf2.ngrok.io";
         break;
     }
   }

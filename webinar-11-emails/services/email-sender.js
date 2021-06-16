@@ -29,7 +29,7 @@ class CreateSenderNodemailer {
 
     return await transporter.sendMail({
       ...message,
-      from: `${process.env.SENDGRID_SENDER_NAME} <${process.env.NODEMAILER_SENDER}>`,
+      from: `${process.env.NODEMAILER_SENDER_NAME} <${process.env.NODEMAILER_SENDER}>`,
     });
   }
 }

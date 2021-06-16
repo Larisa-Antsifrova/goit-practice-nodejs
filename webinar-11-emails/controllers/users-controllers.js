@@ -29,9 +29,16 @@ const register = async (req, res, next) => {
       await Users.createUser(req.body);
 
     try {
+      // Using SendGrid
+      // const emailService = new EmailService(
+      //   process.env.NODE_ENV,
+      //   new CreateSenderSendgrid(),
+      // );
+
+      // Using NodeMailer
       const emailService = new EmailService(
         process.env.NODE_ENV,
-        new CreateSenderSendgrid(),
+        new CreateSenderNodemailer(),
       );
 
       await emailService.sendVerifictionEmail(verifyToken, email, name);
@@ -143,9 +150,6 @@ const verify = async (req, res, next) => {
   try {
     const user = await Users.findByVerifyToken(req.params.token);
 
-    console.log("user", user);
-    console.log("token", req.params.token);
-
     if (user) {
       await Users.updateVerificationToken(user.id, true, null);
 
@@ -168,6 +172,45 @@ const verify = async (req, res, next) => {
 
 const repeatVerification = async (req, res, next) => {
   try {
+    const user = await Users.findByEmail(req.body.email);
+
+    if (user) {
+      const { name, email, isVerified, verifyToken } = user;
+
+      if (!isVerified) {
+        // Using SendGrid
+        // const emailService = new EmailService(
+        //   process.env.NODE_ENV,
+        //   new CreateSenderSendgrid(),
+        // );
+
+        // Using NodeMailer
+        const emailService = new EmailService(
+          process.env.NODE_ENV,
+          new CreateSenderNodemailer(),
+        );
+
+        await emailService.sendVerifictionEmail(verifyToken, email, name);
+
+        return res.json({
+          status: "success",
+          code: HttpCodes.OK,
+          message: "Verification email was resent!",
+        });
+      }
+
+      return res.status(HttpCodes.CONFLICT).json({
+        status: "error",
+        code: HttpCodes.CONFLICT,
+        message: "Email has been already verified.",
+      });
+    }
+
+    return res.status(HttpCodes.NOT_FOUND).json({
+      status: "error",
+      code: HttpCodes.NOT_FOUND,
+      message: "User not found.",
+    });
   } catch (error) {
     next(error);
   }

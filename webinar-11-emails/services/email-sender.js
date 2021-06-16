@@ -6,7 +6,10 @@ class CreateSenderSendgrid {
   async send(message) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-    return await sgMail.send({ ...message, from: process.env.SENDGRID_SENDER });
+    return await sgMail.send({
+      ...message,
+      from: `${process.env.SENDGRID_SENDER_NAME} <${process.env.SENDGRID_SENDER}>`,
+    });
   }
 }
 
@@ -26,7 +29,7 @@ class CreateSenderNodemailer {
 
     return await transporter.sendMail({
       ...message,
-      from: process.env.NODEMAILER_SENDER,
+      from: `${process.env.SENDGRID_SENDER_NAME} <${process.env.NODEMAILER_SENDER}>`,
     });
   }
 }

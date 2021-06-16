@@ -139,9 +139,45 @@ const avatars = async (req, res, next) => {
   }
 };
 
+const verify = async (req, res, next) => {
+  try {
+    const user = await Users.findByVerifyToken(req.params.token);
+
+    console.log("user", user);
+    console.log("token", req.params.token);
+
+    if (user) {
+      await Users.updateVerificationToken(user.id, true, null);
+
+      return res.json({
+        status: "success",
+        code: HttpCodes.OK,
+        message: "Your account is verified!",
+      });
+    }
+
+    return res.status(HttpCodes.BAD_REQUEST).json({
+      status: "error",
+      code: HttpCodes.BAD_REQUEST,
+      message: "Verification link is no longer valid.",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const repeatVerification = async (req, res, next) => {
+  try {
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
   avatars,
+  verify,
+  repeatVerification,
 };

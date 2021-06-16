@@ -7,7 +7,7 @@ class EmailService {
 
     switch (env) {
       case "development":
-        this.link = `http://localhost:${process.env.PORT || 3000}/`;
+        this.link = `http://localhost:${process.env.PORT || 3000}`;
         break;
 
       case "production":
@@ -15,7 +15,7 @@ class EmailService {
         break;
 
       default:
-        this.link = `http://localhost:${process.env.PORT || 3000}/`;
+        this.link = `http://localhost:${process.env.PORT || 3000}`;
         break;
     }
   }

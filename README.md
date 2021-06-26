@@ -16,6 +16,8 @@
 - 07 - Authentication.
 - 08 - Authorization.
 - 09 - Images uploades: local strategy vs cloud storage.
+- 10 - Testing: unit and e2e tests with Jest and Supertest.
+- 11 - Email. User's account verification via e-mail: Sendgrid and Nodemailer.
 
 ## Lectures
 
